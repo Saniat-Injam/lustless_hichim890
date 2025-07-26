@@ -1,0 +1,88 @@
+import 'package:flutter/material.dart';
+import 'package:lustless_hichim890/core/common/styles/global_text_style.dart';
+import 'package:lustless_hichim890/core/utils/constants/colors.dart';
+
+// ignore: must_be_immutable
+class AuthCustomTextField extends StatelessWidget {
+  TextEditingController controller;
+  String text;
+  Widget? suffixIcon;
+  VoidCallback? onTap;
+  bool? obscureText;
+  String? Function(String?)? validator;
+  final ValueChanged<String>? onChanged;
+  final double? borderRadius;
+  AuthCustomTextField({
+    super.key,
+    required this.controller,
+    required this.text,
+    this.suffixIcon,
+    this.onTap,
+    this.obscureText = false,
+    this.validator,
+    this.onChanged,
+    this.borderRadius = 12,
+  });
+  @override
+  Widget build(BuildContext context) {
+    return TextFormField(
+      stylusHandwritingEnabled: true,
+      controller: controller,
+      onTap: onTap,
+      onChanged: onChanged,
+      obscureText: obscureText!,
+
+      style: getTextStyle(
+        fontSize: 14,
+        color: AppColors.textWhite,
+        fontWeight: obscureText! ? FontWeight.bold : FontWeight.w400,
+      ),
+      validator: validator,
+      decoration: InputDecoration(
+        contentPadding: EdgeInsets.symmetric(horizontal: 16, vertical: 18),
+        hintText: text,
+        suffixIcon: suffixIcon,
+        hintStyle: getTextStyle(
+          color: Color(0xFF898989),
+          fontSize: 16,
+          fontWeight: FontWeight.w400,
+        ),
+        filled: true,
+        fillColor: AppColors.primary,
+        border: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(borderRadius ?? 10),
+          borderSide: BorderSide(
+            width: 1,
+            color: AppColors.textfieldBorderColors,
+          ),
+        ),
+        enabledBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(borderRadius ?? 10),
+          borderSide: BorderSide(
+            width: 1,
+            color: AppColors.textfieldBorderColors,
+          ),
+        ),
+        focusedBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(borderRadius ?? 10),
+          borderSide: BorderSide(
+            width: 1,
+            color: AppColors.textfieldBorderColors,
+          ),
+        ),
+        errorBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(borderRadius ?? 10),
+          borderSide: BorderSide(width: 1, color: Color(0xFFE53935)),
+        ),
+        focusedErrorBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(borderRadius ?? 10),
+          borderSide: BorderSide(width: 1, color: Color(0xFFE53935)),
+        ),
+        errorStyle: getTextStyle(color: Color(0xFFE53935), fontSize: 12),
+        errorMaxLines: 1,
+        isDense: true,
+      ),
+      cursorHeight: 30,
+    );
+  }
+}
